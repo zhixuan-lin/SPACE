@@ -1,0 +1,77 @@
+seed: 3
+model: 'SPACE'
+resume: true
+resume_ckpt: ''
+parallel: false
+device_ids: [4, 5, 6, 7]
+device: 'cuda:0'
+logdir: '../output/logs'
+checkpointdir: '../output/checkpoints'
+evaldir: '../output/eval'
+
+dataset: 'ATARI'
+dataset_roots:
+  OBJ3D_SMALL: '../data/OBJ3D_SMALL'
+  OBJ3D_LARGE: '../data/OBJ3D_LARGE'
+  ATARI: '../data/ATARI'
+
+
+train:
+  batch_size: 12
+  max_epochs: 1000
+  max_steps: 100000
+  print_every: 500
+  save_every: 1000
+  num_workers: 4
+  clip_norm: 1.0
+  max_ckpt: 4
+  eval_on: false
+  solver:
+    fg:
+      optim: 'RMSprop'
+      lr: 1e-5
+    bg:
+      optim: 'Adam'
+      lr: 1e-3
+
+arch:
+  G: 16
+  fg_sigma: 0.20
+
+  z_pres_start_step: 4000
+  z_pres_end_step: 10000
+  z_pres_start_value: 0.1
+  z_pres_end_value: 0.01
+
+  z_scale_mean_start_step: 0
+  z_scale_mean_end_step: 20000
+  z_scale_mean_start_value: -2.0
+  z_scale_mean_end_value: -2.5
+
+  tau_start_step: 0
+  tau_end_step: 20000
+  tau_start_value: 2.5
+  tau_end_value: 0.1
+
+  fix_alpha_steps: 4000
+  fix_alpha_value: 0.05
+
+  K: 4
+  bg_sigma: 0.10
+
+  # Turn off boundary loss
+  boundary_loss: false
+gamelist: [
+#    'Atlantis-v0',
+#    'Asterix-v0',
+#    'Carnival-v0',
+#    'DoubleDunk-v0',
+#    'Kangaroo-v0',
+#    'MontezumaRevenge-v0',
+#    'MsPacman-v0',
+#    'Pooyan-v0',
+#    'Qbert-v0',
+#    'SpaceInvaders-v0',
+    'Riverraid-v0',
+    ]
+
